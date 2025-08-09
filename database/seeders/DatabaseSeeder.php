@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            SupplierSeeder::class,
-            SupplierBookSeeder::class,
+            CategorySeeder::class,
+            BookSeeder::class
         ]);
     }
 }

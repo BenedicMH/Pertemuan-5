@@ -18,7 +18,8 @@ class BookSeeder extends Seeder
             'author' => 'J.K. Rowling',
             'publisher' => 'Gramedia',
             'year' => '1990',
-            'category_id' => '1'
+            'category_id' => '1',
+            'book_gambar' => 'sada',
         ]);
     }
 }

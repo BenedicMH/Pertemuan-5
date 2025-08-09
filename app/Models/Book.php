@@ -15,6 +15,8 @@ class Book extends Model
         'author',
         'publisher',
         'year',
+        'category_id',
+        'book_gambar'
     ];
 
     public function phone()

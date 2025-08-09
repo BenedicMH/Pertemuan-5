@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Models\Category;
 use App\Models\Phone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,11 +14,15 @@ class BookController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $categories = Category::all();
+        return view('welcome', compact('categories'));
     }
 
     public function create(Request $req)
     {
+        $nama = $req->file('gambar')->getClientOriginalName();
+        $req->file('gambar')->storeAs('/images', $nama);
+
         $validated = $req->validate([
             'title' => 'required|max:8',
             'author' => 'required',
@@ -33,6 +38,8 @@ class BookController extends Controller
                 'author' => $req->author,
                 'publisher' => $req->publisher,
                 'year' => $req->year,
+                'category_id' => $req->category_id,
+                'book_gambar' => $nama,
             ]);
         }
 
