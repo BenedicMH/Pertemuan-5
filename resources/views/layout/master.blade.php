@@ -28,6 +28,26 @@
                         <a class="nav-link" href="{{ route('show') }}">List</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav">
+                    @auth
+                        <li class="nav-item">
+                            <span class="navbar-text">Hello, {{ Auth::user()->name }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger">logout</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
+                    @endauth
+                </ul>
             </div>
         </div>
     </nav>

@@ -43,4 +43,7 @@
             @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center mt-4">
+        {{ $books->links('pagination::bootstrap-4') }}
+    </div>
 @endsection

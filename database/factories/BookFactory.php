@@ -21,6 +21,8 @@ class BookFactory extends Factory
             'author' => fake()->name(),
             'publisher' => fake()->word(),
             'year' => fake()->year(),
+            'category_id' => '1',
+            'book_gambar' => 'sada',
         ];
     }
 }

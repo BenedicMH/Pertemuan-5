@@ -49,7 +49,7 @@ class BookController extends Controller
     public function show()
     {
         // $books = DB::table('books')->join('categories', 'books.category_id', '=', 'categories.id')->get();
-        $books = Book::all();
+        $books = Book::paginate(10);
         return view('list', compact('books'));
     }
 
