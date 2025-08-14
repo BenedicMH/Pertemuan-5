@@ -17,6 +17,13 @@ class SimpleAuth
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         if (!Auth::check()) {
+            // Return JSON response for API requests
+            if ($request->expectsJson() || $request->is('api/*')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unauthenticated. Please login first.'
+                ], 401);
+            }
             return redirect()->route('login');
         }
 
@@ -24,9 +31,19 @@ class SimpleAuth
             $userRole = Auth::user()->role ?? 'user';
 
             if (!in_array($userRole, $roles)) {
+                // Return JSON response for API requests
+                if ($request->expectsJson() || $request->is('api/*')) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Unauthorized Access. Insufficient permissions.',
+                        'required_role' => $roles,
+                        'user_role' => $userRole
+                    ], 403);
+                }
                 abort(403, 'Unauthorized Access');
             }
         }
         return $next($request);
     }
+
 }
